@@ -3,16 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityManagement.Infrastructure.Persistence
 {
-    public class AppIdentityDbContext : IdentityDbContext
+    public class AppIdentityDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
-        public AppIdentityDbContext(DbContextOptions options) : base(options)
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
-        }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<AppRole>().HasData(new AppRole() { Name = "user" });
-            base.OnModelCreating(builder);
         }
     }
 }

@@ -1,14 +1,16 @@
-﻿using IdentityServer4.EntityFramework.Entities;
+﻿using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer4.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace IdentityManagement.Infrastructure.Persistence
 {
-    public class SeedData
+    public static class SeedData
     {
         public static void EnsureSeedData(IServiceProvider provider)
         {
@@ -22,23 +24,26 @@ namespace IdentityManagement.Infrastructure.Persistence
             {
                 var clients = new List<Client>();
                 configuration.GetSection("IdentityServer:Clients").Bind(clients);
-                context.Clients.AddRange(clients); //TODO: toentity?
+                foreach (Client client in clients)
+                {
+                    context.Clients.Add(client.ToEntity());
+                }
                 context.SaveChanges();
             }
-
             if (!context.ApiResources.Any())
             {
                 var apiResources = new List<ApiResource>();
                 configuration.GetSection("IdentityServer:ApiResources").Bind(apiResources);
-                context.ApiResources.AddRange(apiResources);
+                foreach (var apiResource in apiResources)
+                    context.ApiResources.Add(apiResource.ToEntity());
                 context.SaveChanges();
             }
-
             if (!context.IdentityResources.Any())
             {
                 var identityResources = new List<IdentityResource>();
                 configuration.GetSection("IdentityServer:IdentityResources").Bind(identityResources);
-                context.IdentityResources.AddRange(identityResources);
+                foreach (var identityResource in identityResources)
+                    context.IdentityResources.Add(identityResource.ToEntity());
                 context.SaveChanges();
             }
         }
