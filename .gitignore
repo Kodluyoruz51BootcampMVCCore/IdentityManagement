@@ -6,3 +6,12 @@
 /IdentityManagement.Infrastructure/bin/Debug/netcoreapp3.1
 /IdentityManagement.Infrastructure/obj
 /IdentityManagement.Server/obj
+/IdentityManagement.Server/bin/Debug/netcoreapp3.1/runtimes
+/IdentityManagement.Server/bin/Debug/netcoreapp3.1
+/IdentityManagement.Tests/bin/Debug/netcoreapp3.1
+/IdentityManagement.Tests/obj
+/IdentityManagement.Tests.MSTest/bin/Debug/netcoreapp3.1
+/IdentityManagement.Tests.MSTest/obj
+/IdentityManagement.Tests.XUnit/bin/Debug/netcoreapp3.1
+/IdentityManagement.Tests.XUnit/obj
+*.coverage
